@@ -7,7 +7,7 @@ Repeater {
     property string imageBasename
     property string entityType: ""
     property int numButtons: 0
-    property int rightMargin: 0
+    property int leftMargin: 0
     property int topMargin: 0
 
     model: numButtons
@@ -15,7 +15,7 @@ Repeater {
         entityType: entityButtons.entityType
         imageBasename: entityButtons.imageBasename
         variationIndex: index
-        rightMargin: entityButtons.rightMargin
+        leftMargin: entityButtons.leftMargin
         topMargin: entityButtons.topMargin
     }
 }

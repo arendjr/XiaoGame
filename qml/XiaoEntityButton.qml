@@ -5,7 +5,7 @@ BuildEntityButton {
     property string imageBasename: ""
     property string entityType: ""
     property int variationIndex: 0
-    property int rightMargin: 0
+    property int leftMargin: 0
     property int topMargin: 0
 
     toCreateEntityType: "entities/" + entityType + ".qml"
@@ -15,8 +15,8 @@ BuildEntityButton {
     anchors {
         top: parent.top
         topMargin: topMargin + 20 * variationIndex
-        right: parent.right
-        rightMargin: rightMargin
+        left: parent.left
+        leftMargin: leftMargin
     }
 
     Image {

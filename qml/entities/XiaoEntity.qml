@@ -1,11 +1,13 @@
 import QtQuick 1.1
 import VPlay 1.0
+import Box2D 1.0
 
 EntityBase {
     id: entity
 
     width: 16
     height: 16
+    z: 1
 
     property string imageBasename: ""
 
@@ -13,6 +15,12 @@ EntityBase {
     property int boxY: 0
     property int boxWidth: width
     property int boxHeight: height
+
+    property alias collider: collider
+
+    property bool moveable: false
+
+    property bool obstacle: false
 
     property bool inLevelEditingMode: scene.state === "levelEditing"
 
@@ -44,6 +52,10 @@ EntityBase {
     signal entityClicked
 
     signal entityPressAndHold
+
+    signal beginContact(variant other)
+
+    signal endContact(variant other)
 
     onEntityClicked: {
         if (scene.state === "levelEditing") {
@@ -113,7 +125,17 @@ EntityBase {
         y: boxY
         width: boxWidth
         height: boxHeight
+        bodyType: moveable ? Body.Dynamic : Body.Static
         collisionTestingOnlyMode: true
+        fixedRotation: true
+
+        fixture.onBeginContact: {
+            beginContact(other);
+        }
+
+        fixture.onEndContact: {
+            endContact(other);
+        }
     }
 
     // a red rectangle will be shown when the entity can't be built on the position

@@ -5,10 +5,34 @@ import VPlay 1.0
 Scene {
     id: scene
 
+    property alias controlsOverlay: controlsOverlay
     property alias entitiesBar: entitiesBar
     property alias editEntityBar: editEntityBar
 
     gridSize: 16
+
+    XiaoControlsOverlay {
+        id: controlsOverlay
+        anchors.fill: gameWindowAnchorItem
+        visible: scene.state === "playing"
+        z: 101
+
+        onLeftClicked: {
+            movePlayer(-1, 0);
+        }
+
+        onUpClicked: {
+            movePlayer(0, -1);
+        }
+
+        onRightClicked: {
+            movePlayer(1, 0);
+        }
+
+        onDownClicked: {
+            movePlayer(0, 1);
+        }
+    }
 
     XiaoEntitiesBar {
         id: entitiesBar
@@ -17,7 +41,8 @@ Scene {
             left: gameWindowAnchorItem.left
             bottom: gameWindowAnchorItem.bottom
         }
-        z: 1
+        visible: scene.state === "levelEditing"
+        z: 101
     }
 
     XiaoEditEntityBar {
@@ -28,11 +53,18 @@ Scene {
             bottom: gameWindowAnchorItem.bottom
         }
         visible: scene.state === "levelEditing"
-        z: 1
+        z: 101
     }
 
     onStateChanged: {
         // reset selection when state changes
         editEntityBar.entitySelected(null);
+    }
+
+    function movePlayer(dx, dy) {
+        var player = entityManager.getEntityArrayByType("player")[0];
+        if (player) {
+            player.move(dx, dy);
+        }
     }
 }

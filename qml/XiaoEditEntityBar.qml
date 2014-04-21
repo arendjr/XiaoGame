@@ -24,19 +24,35 @@ Item {
         opacity: 0.7
     }
 
-    Column {
-        anchors { fill: parent; leftMargin: 5; topMargin: 5; rightMargin: 5 }
-        spacing: 5
+    SimpleButton {
+        anchors {
+            left: parent.left; top: parent.top; right: parent.right
+            leftMargin: 5; topMargin: 5; rightMargin: 5
+        }
+        font.pointSize: 10
+        text: "Destroy"
         visible: !!selectedEntity
 
-        SimpleButton {
-            font.pointSize: 10
-            text: "Destroy"
+        onClicked: {
+            selectedEntity.removeEntity();
+            entitySelected(null);
+        }
+    }
 
-            onClicked: {
-                selectedEntity.removeEntity();
-                entitySelected(null);
-            }
+    SimpleButton {
+        anchors {
+            left: parent.left; bottom: parent.bottom; right: parent.right
+            leftMargin: 5; bottomMargin: 5; rightMargin: 5
+        }
+        font.pointSize: 10
+        text: "Save"
+
+        onClicked: {
+            levelEditor.saveCurrentLevel({
+                levelMetaData: { levelName: "landing" },
+                customData: {}
+            });
+            levelEditor.exportLevelAsFile();
         }
     }
 }

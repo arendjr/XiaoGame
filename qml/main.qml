@@ -77,18 +77,31 @@ GameWindow {
     }
 
     Keys.onPressed: {
+        var deltaX = 0, deltaY = 0;
+
         if (event.key === Qt.Key_Up) {
-            level.y -= 64;
+            deltaY = -1;
             event.accepted = true;
         } else if (event.key === Qt.Key_Right) {
-            level.x += 64;
+            deltaX = 1;
             event.accepted = true;
         } else if (event.key === Qt.Key_Down) {
-            level.y += 64;
+            deltaY = 1;
             event.accepted = true;
         } else if (event.key === Qt.Key_Left) {
-            level.x -= 64;
+            deltaX = -1;
             event.accepted = true;
+        }
+
+        if (event.modifiers & Qt.ShiftModifier) {
+            level.x += 64 * deltaX;
+            level.y += 64 * deltaY;
+
+            if (event.key === Qt.Key_E) {
+                scene.state = (scene.state === "playing" ? "levelEditing" : "playing");
+            }
+        } else {
+            scene.movePlayer(deltaX, deltaY);
         }
     }
 }

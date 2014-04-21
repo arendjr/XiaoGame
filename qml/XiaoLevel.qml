@@ -13,5 +13,6 @@ LevelBase {
     PhysicsWorld {
         debugDraw.opacity: 0.2
         id: physicsWorld
+        updatesPerSecondForPhyiscs: 60
     }
 }

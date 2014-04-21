@@ -1,9 +1,9 @@
 import QtQuick 1.1
 import VPlay 1.0
 
-Item {
+Clipping {
     id: entitiesBar
-    width: 125
+    width: 150
 
     Rectangle {
         anchors.fill: parent
@@ -26,40 +26,17 @@ Item {
             anchors { fill: parent; leftMargin: 5; topMargin: 5; rightMargin: 5 }
             spacing: 5
 
-            SimpleButton {
-                font.pointSize: 10
-                text: scene.state === "playing" ? "Game Mode" : "Edit Mode"
-
-                onClicked: {
-                    scene.state = (scene.state === "playing" ? "levelEditing" : "playing");
-                }
-            }
-
-            SimpleButton {
-                font.pointSize: 10
-                text: "Save"
-                visible: scene.state === "levelEditing"
-
-                onClicked: {
-                    levelEditor.saveCurrentLevel({
-                        levelMetaData: { levelName: "landing" },
-                        customData: {}
-                    });
-                    levelEditor.exportLevelAsFile();
-                }
-            }
-
             XiaoTabsBar {
                 id: tabs
                 tabs: ["Backgrounds", "Houses", "Player"]
-                visible: scene.state === "levelEditing"
+                width: entitiesBar.width - 10
             }
 
             Item {
                 id: backgrounds
-                width: entitiesBar.width - 10
                 height: 1
-                visible: scene.state === "levelEditing" && tabs.selectedTab === "Backgrounds"
+                visible: tabs.selectedTab === "Backgrounds"
+                width: entitiesBar.width - 10
 
                 XiaoEntityButtons {
                     entityType: "Grass"
@@ -92,43 +69,43 @@ Item {
                     entityType: "WaterGrass"
                     imageBasename: "outdoor/water-grass"
                     numButtons: 12
-                    rightMargin: 20
+                    leftMargin: 20
                 }
 
                 XiaoEntityButtons {
                     entityType: "ClayGrass"
                     imageBasename: "outdoor/clay-grass"
                     numButtons: 12
-                    rightMargin: 40
+                    leftMargin: 40
                 }
 
                 XiaoEntityButtons {
                     entityType: "ClayWater"
                     imageBasename: "outdoor/clay-water"
                     numButtons: 12
-                    rightMargin: 60
+                    leftMargin: 60
                 }
 
                 XiaoEntityButtons {
                     entityType: "RockGrass"
                     imageBasename: "outdoor/rock-grass"
                     numButtons: 12
-                    rightMargin: 80
+                    leftMargin: 80
                 }
 
                 XiaoEntityButtons {
                     entityType: "RockWater"
                     imageBasename: "outdoor/rock-water"
                     numButtons: 12
-                    rightMargin: 100
+                    leftMargin: 100
                 }
             }
 
             Item {
                 id: houses
-                width: entitiesBar.width - 10
                 height: 1
-                visible: scene.state === "levelEditing" && tabs.selectedTab === "Houses"
+                visible: tabs.selectedTab === "Houses"
+                width: entitiesBar.width - 10
 
                 XiaoEntityButton {
                     entityType: "House"
@@ -140,9 +117,9 @@ Item {
 
             Item {
                 id: player
-                width: entitiesBar.width - 10
                 height: 1
-                visible: scene.state === "levelEditing" && tabs.selectedTab === "Player"
+                visible: tabs.selectedTab === "Player"
+                width: entitiesBar.width - 10
 
                 XiaoEntityButton {
                     entityType: "Player"
