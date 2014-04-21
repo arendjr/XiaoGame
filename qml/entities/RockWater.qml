@@ -2,7 +2,7 @@ import QtQuick 1.1
 import VPlay 1.0
 
 XiaoEntity {
-    entityType: "rock-water"
+    entityType: "RockWater"
     imageBasename: "outdoor/rock-water"
     variationType: "1"
 }

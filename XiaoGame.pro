@@ -31,6 +31,3 @@ macx {
     QMAKE_INFO_PLIST = macx/XiaoGame-Info.plist
     ENTITLEMENTS = macx/XiaoGame.entitlements
 }
-
-OTHER_FILES += \
-    qml/XiaoEntitiesBar.qml

@@ -28,12 +28,11 @@ Clipping {
 
             XiaoTabsBar {
                 id: tabs
-                tabs: ["Backgrounds", "Houses", "Player"]
+                tabs: ["Backgrounds", "Houses", "Player", "Misc"]
                 width: entitiesBar.width - 10
             }
 
             Item {
-                id: backgrounds
                 height: 1
                 visible: tabs.selectedTab === "Backgrounds"
                 width: entitiesBar.width - 10
@@ -102,7 +101,6 @@ Clipping {
             }
 
             Item {
-                id: houses
                 height: 1
                 visible: tabs.selectedTab === "Houses"
                 width: entitiesBar.width - 10
@@ -116,7 +114,6 @@ Clipping {
             }
 
             Item {
-                id: player
                 height: 1
                 visible: tabs.selectedTab === "Player"
                 width: entitiesBar.width - 10
@@ -124,6 +121,18 @@ Clipping {
                 XiaoEntityButton {
                     entityType: "Player"
                     imageBasename: "player"
+                }
+            }
+
+            Item {
+                height: 1
+                visible: tabs.selectedTab === "Misc"
+                width: entitiesBar.width - 10
+
+                XiaoEntityButtons {
+                    entityType: "Tree"
+                    imageBasename: "outdoor/tree"
+                    numButtons: 2
                 }
             }
         }

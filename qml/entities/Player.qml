@@ -6,7 +6,7 @@ import "../lodash.js" as LoDash
 
 XiaoEntity {
     id: entity
-    entityType: "player"
+    entityType: "Player"
     imageBasename: "player"
     moveable: true
     variationType: "1"
@@ -30,7 +30,7 @@ XiaoEntity {
 
     onBeginContact: {
         var otherEntity = other.parent.parent.owningEntity;
-        if (otherEntity.entityType !== "player") {
+        if (otherEntity.entityType !== "Player") {
             // collidingEntities.push() doesn't seem to work (array properties are not mutable?)
             collidingEntities = collidingEntities.concat([otherEntity]);
         }

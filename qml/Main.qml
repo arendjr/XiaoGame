@@ -71,6 +71,7 @@ GameWindow {
             Qt.resolvedUrl("entities/Rock.qml"),
             Qt.resolvedUrl("entities/RockGrass.qml"),
             Qt.resolvedUrl("entities/RockWater.qml"),
+            Qt.resolvedUrl("entities/Tree.qml"),
             Qt.resolvedUrl("entities/Water.qml"),
             Qt.resolvedUrl("entities/WaterGrass.qml")
         ]
