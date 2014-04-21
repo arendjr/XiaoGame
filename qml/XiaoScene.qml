@@ -62,7 +62,7 @@ Scene {
     }
 
     function movePlayer(dx, dy) {
-        var player = entityManager.getEntityArrayByType("player")[0];
+        var player = entityManager.getEntityArrayByType("Player")[0];
         if (player) {
             player.move(dx, dy);
         }
