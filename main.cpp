@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
     VPlayApplication vplayApplication(argc, argv);
     
     // the default mainQmlFileName is qml/main.qml - if you want to change the entry qml file, change it here before startApplication() is called
-    vplayApplication.setMainQmlFileName("qml/main.qml");
+    vplayApplication.setMainQmlFileName("qml/Main.qml");
     
     // V-Play has 2 renderers:
     // * the performance optimized CocosRenderer: this is the default renderer on all platforms and has a better performance than QmlRenderer; its only limitation is that not all QML items are fully supported, and no debug shapes of physics objects are available

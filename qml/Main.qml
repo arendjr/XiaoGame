@@ -35,7 +35,7 @@ GameWindow {
         levelLoader: levelLoader
 
         Component.onCompleted: {
-            console.log("loading...");
+            console.log("Loading levels...");
             levelEditor.loadAllLevelsFromStorageLocation(applicationJSONLevelsLocation);
         }
 
