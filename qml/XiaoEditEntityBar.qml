@@ -2,9 +2,16 @@ import QtQuick 1.1
 import VPlay 1.0
 
 Item {
+    id: editEntityBar
+
     property variant selectedEntity: null
 
-    function entitySelected(entity) {
+    property variant __propertyEditors: []
+
+    /**
+     * Selects an entity.
+     */
+    function selectEntity(entity) {
         if (selectedEntity) {
             selectedEntity.entityState = "";
         }
@@ -15,7 +22,6 @@ Item {
         }
     }
 
-    id: editEntityBar
     width: 125
 
     Rectangle {
@@ -25,25 +31,23 @@ Item {
     }
 
     SimpleButton {
-        anchors {
-            left: parent.left; top: parent.top; right: parent.right
-            leftMargin: 5; topMargin: 5; rightMargin: 5
-        }
+        id: destroyButton
+
+        anchors { left: parent.left; top: parent.top; right: parent.right; margins: 5 }
         font.pointSize: 10
         text: "Destroy"
         visible: !!selectedEntity
 
         onClicked: {
             selectedEntity.removeEntity();
-            entitySelected(null);
+            selectEntity(null);
         }
     }
 
     SimpleButton {
-        anchors {
-            left: parent.left; bottom: parent.bottom; right: parent.right
-            leftMargin: 5; bottomMargin: 5; rightMargin: 5
-        }
+        id: saveButton
+
+        anchors { left: parent.left; bottom: parent.bottom; right: parent.right; margins: 5 }
         font.pointSize: 10
         text: "Save"
 

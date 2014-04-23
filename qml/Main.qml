@@ -5,13 +5,17 @@ import "lodash.js" as LoDash
 
 
 GameWindow {
+    id: gameWindow
+
     activeScene: scene
 
     width: 960
     height: 640
 
-    property alias entitiesBar: scene.entitiesBar
+    property alias controlsOverlay: scene.controlsOverlay
     property alias editEntityBar: scene.editEntityBar
+    property alias entitiesBar: scene.entitiesBar
+    property alias inventoryButton: scene.inventoryButton
     property alias level: levelLoader.loadedLevel
 
     XiaoScene {
@@ -50,6 +54,8 @@ GameWindow {
         }
 
         onLoadLevelFinished: {
+            // let the scene do its own initialization
+            scene.init();
             // entitiesBar must be initialized lazily, otherwise level is not available yet
             // to entityManager and BuildEntityButtons cannot instantiate entities
             entitiesBar.init();
@@ -71,10 +77,15 @@ GameWindow {
             Qt.resolvedUrl("entities/Rock.qml"),
             Qt.resolvedUrl("entities/RockGrass.qml"),
             Qt.resolvedUrl("entities/RockWater.qml"),
+            Qt.resolvedUrl("entities/Sign.qml"),
             Qt.resolvedUrl("entities/Tree.qml"),
             Qt.resolvedUrl("entities/Water.qml"),
             Qt.resolvedUrl("entities/WaterGrass.qml")
         ]
+    }
+
+    XiaoItemManager {
+        id: itemManager
     }
 
     Keys.onPressed: {
@@ -95,11 +106,12 @@ GameWindow {
         }
 
         if (event.modifiers & Qt.ShiftModifier) {
-            level.x += 64 * deltaX;
-            level.y += 64 * deltaY;
-
             if (event.key === Qt.Key_E) {
                 scene.state = (scene.state === "playing" ? "levelEditing" : "playing");
+                event.accepted = true;
+            } else {
+                level.x += 64 * deltaX;
+                level.y += 64 * deltaY;
             }
         } else {
             scene.movePlayer(deltaX, deltaY);

@@ -1,3 +1,5 @@
+.pragma library
+
 /**
  * @license
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>

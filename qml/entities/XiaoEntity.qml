@@ -59,7 +59,7 @@ EntityBase {
 
     onEntityClicked: {
         if (scene.state === "levelEditing") {
-            editEntityBar.entitySelected(entity);
+            editEntityBar.selectEntity(entity);
         }
     }
 

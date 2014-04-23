@@ -5,10 +5,17 @@
     "versioncode": 1,
     "versionname": "1.0",
     
+    "android": {
+        "identifier": "net.vplay.builds.XiaoGame"
+    },
+    
     "ios": {
-        "prerendered_icon": true
+        "prerendered_icon": true,
+        "identifier": "net.vplay.builds.XiaoGame"
     },
 
-    "plugins": [ "gui" ]
+    "plugins": [ "gui" ],
+
+    "platforms": [ "android", "ios", "blackberry" ]
 }
 

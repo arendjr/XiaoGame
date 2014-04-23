@@ -6,8 +6,30 @@ Scene {
     id: scene
 
     property alias controlsOverlay: controlsOverlay
-    property alias entitiesBar: entitiesBar
     property alias editEntityBar: editEntityBar
+    property alias entitiesBar: entitiesBar
+    property alias inventoryButton: inventoryButton
+
+    property variant player: null
+
+    /**
+     * Initializes the scene.
+     */
+    function init() {
+        player = entityManager.getEntityArrayByType("Player")[0];
+    }
+
+    /**
+     * Moves the player dx steps to the right, and dy steps down.
+     */
+    function movePlayer(dx, dy) {
+        if (scene.state === "playing") {
+            var player = scene.player;
+            if (player) {
+                player.move(dx, dy);
+            }
+        }
+    }
 
     gridSize: 16
 
@@ -34,6 +56,26 @@ Scene {
         }
     }
 
+    XiaoInventoryButton {
+        id: inventoryButton
+        visible: scene.state === "playing" || scene.state === "inventory"
+        z: 101
+
+        onClicked: {
+            if (scene.state === "playing") {
+                scene.state = "inventory";
+            } else {
+                scene.state = "playing";
+            }
+        }
+    }
+
+    XiaoInventoryMenu {
+        id: inventoryMenu
+        anchors { fill: parent; topMargin: 5; rightMargin: 60; bottomMargin: 5; leftMargin: 60 }
+        z: 101
+    }
+
     XiaoEntitiesBar {
         id: entitiesBar
         anchors {
@@ -56,15 +98,19 @@ Scene {
         z: 101
     }
 
-    onStateChanged: {
-        // reset selection when state changes
-        editEntityBar.entitySelected(null);
+    XiaoSignDisplay {
+        id: signDisplay
+        visible: scene.state === "sign"
     }
 
-    function movePlayer(dx, dy) {
-        var player = entityManager.getEntityArrayByType("Player")[0];
-        if (player) {
-            player.move(dx, dy);
+    onStateChanged: {
+        if (state === "inventory") {
+            inventoryMenu.show();
+        } else {
+            inventoryMenu.hide();
+
+            // reset selection when state changes
+            editEntityBar.selectEntity(null);
         }
     }
 }

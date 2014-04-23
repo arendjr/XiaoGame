@@ -134,6 +134,13 @@ Clipping {
                     imageBasename: "outdoor/tree"
                     numButtons: 2
                 }
+
+                XiaoEntityButtons {
+                    entityType: "Sign"
+                    imageBasename: "sign"
+                    leftMargin: 20
+                    numButtons: 3
+                }
             }
         }
     }
