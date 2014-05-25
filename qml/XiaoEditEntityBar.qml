@@ -52,11 +52,7 @@ Item {
         text: "Save"
 
         onClicked: {
-            levelEditor.saveCurrentLevel({
-                levelMetaData: { levelName: "landing" },
-                customData: {}
-            });
-            levelEditor.exportLevelAsFile();
+            gameWindow.saveLevel();
         }
     }
 }

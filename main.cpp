@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     // * the performance optimized CocosRenderer: this is the default renderer on all platforms and has a better performance than QmlRenderer; its only limitation is that not all QML items are fully supported, and no debug shapes of physics objects are available
     // * the QmlRenderer is primarily needed for debugging of physics games on desktops
     //    vplayApplication.setCocosRendererEnabled(false);
-    vplayApplication.setQmlRendererEnabled(false);
+    vplayApplication.setQmlRendererEnabled(true);
     
     // this must be called in each game before startApplication() is called, so the import VPlay 1.0 can be resolved
     Q_INIT_RESOURCE(resources_vplay);

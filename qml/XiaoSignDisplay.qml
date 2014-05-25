@@ -4,27 +4,67 @@ import VPlay 1.0
 Rectangle {
     id: signDisplay
 
-    color: "#8888cc"
+    color: "#cc8888"
 
-    property variant __items: []
+    Rectangle {
+        anchors { fill: parent; margins: 2 }
+        color: "#442222"
 
-    Repeater {
-        id: gridRepeater
-        model: XiaoInventoryMenuLogic.NUM_CELLS
+        Text {
+            anchors.fill: parent
+            color: "#ffffcc"
+            font.family: "Arial"
+            horizontalAlignment: Text.AlignHCenter
+            text: scene.activeSign ? scene.activeSign.text : ""
+            verticalAlignment: Text.AlignVCenter
+            visible: scene.state === "sign"
+        }
 
-        Rectangle {
-            color: "#222244"
-            height: 50
-            width: 50
-            x: XiaoInventoryMenuLogic.getGridX(index)
-            y: XiaoInventoryMenuLogic.getGridY(index)
+        TextEdit {
+            id: textEdit
 
-            Text {
-                anchors { top: parent.top; right: parent.right; margins: 2 }
-                color: "#ccaa00"
-                font.family: "Arial"
-                text: ""
+            anchors { fill: parent; bottomMargin: 36 }
+            color: "#ffffcc"
+            focus: true
+            font.family: "Arial"
+            text: scene.activeSign ? scene.activeSign.text : ""
+            visible: scene.state === "signEditing"
+        }
+
+        XiaoButton {
+            anchors { left: parent.left; bottom: parent.bottom; margins: 3 }
+            text: "Cancel"
+            visible: scene.state === "signEditing"
+            width: parent.width / 2 - 6
+
+            onClicked: {
+                textEdit.text = scene.activeSign.text;
+                gameWindow.forceActiveFocus();
+                scene.state = "sign";
             }
+        }
+
+        XiaoButton {
+            anchors { right: parent.right; bottom: parent.bottom; margins: 3 }
+            text: "Save"
+            visible: scene.state === "signEditing"
+            width: parent.width / 2 - 6
+
+            onClicked: {
+                scene.activeSign.text = textEdit.text;
+                gameWindow.saveLevel();
+                gameWindow.forceActiveFocus();
+                scene.state = "sign";
+            }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: scene.gameWindowAnchorItem
+        z: 120
+
+        onClicked: {
+            scene.state = "playing";
         }
     }
 }

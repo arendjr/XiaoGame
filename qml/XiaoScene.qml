@@ -12,6 +12,8 @@ Scene {
 
     property variant player: null
 
+    property variant activeSign: null
+
     /**
      * Initializes the scene.
      */
@@ -23,11 +25,23 @@ Scene {
      * Moves the player dx steps to the right, and dy steps down.
      */
     function movePlayer(dx, dy) {
-        if (scene.state === "playing") {
+        if (state === "playing") {
             var player = scene.player;
             if (player) {
                 player.move(dx, dy);
             }
+        } else if (state === "sign") {
+            state = "playing";
+        }
+    }
+
+    /**
+     * Shows the text on a sign the player is looking at.
+     */
+    function showSign(sign) {
+        if (state === "playing") {
+            activeSign = sign;
+            state = "sign";
         }
     }
 
@@ -100,7 +114,11 @@ Scene {
 
     XiaoSignDisplay {
         id: signDisplay
-        visible: scene.state === "sign"
+        anchors.centerIn: parent
+        height: parent.height / 2
+        visible: scene.state === "sign" || scene.state === "signEditing"
+        width: parent.width / 2
+        z: 101
     }
 
     onStateChanged: {

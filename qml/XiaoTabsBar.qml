@@ -12,6 +12,7 @@ Flickable {
 
     Row {
         id: row
+
         height: parent.height
         spacing: 3
 
@@ -27,12 +28,15 @@ Flickable {
                     anchors.fill: parent
                     color: "#fff"
                     font.pointSize: 8
-                    text: modelData
                     horizontalAlignment: Text.AlignHCenter
+                    text: modelData
+                    textFormat: Text.PlainText
+                    verticalAlignment: Text.AlignVCenter
                 }
 
                 MouseArea {
                     anchors.fill: parent
+
                     onClicked: {
                         selectedTab = modelData;
                     }

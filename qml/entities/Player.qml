@@ -35,7 +35,6 @@ XiaoEntity {
         }
         entity.inventory = inventory;
 
-        // make sure we have no active property bindings on these properties
         // and show a nice animation adding the item to the inventory button
         var item = itemManager.createItemByName(itemName, {
             x: (options.fromX || entity.x) + level.x,

@@ -18,6 +18,17 @@ GameWindow {
     property alias inventoryButton: scene.inventoryButton
     property alias level: levelLoader.loadedLevel
 
+    /**
+     * Saves the current level.
+     */
+    function saveLevel() {
+        levelEditor.saveCurrentLevel({
+            levelMetaData: { levelName: "landing" },
+            customData: {}
+        });
+        levelEditor.exportLevelAsFile();
+    }
+
     XiaoScene {
         id: scene
 
@@ -105,9 +116,22 @@ GameWindow {
             event.accepted = true;
         }
 
-        if (event.modifiers & Qt.ShiftModifier) {
+        if (event.modifiers & Qt.ControlModifier) {
             if (event.key === Qt.Key_E) {
-                scene.state = (scene.state === "playing" ? "levelEditing" : "playing");
+                switch (scene.state) {
+                case "playing":
+                    scene.state = "levelEditing";
+                    break;
+                case "levelEditing":
+                    scene.state = "playing";
+                    break;
+                case "sign":
+                    scene.state = "signEditing";
+                    break;
+                case "signEditing":
+                    scene.state = "sign";
+                    break;
+                }
                 event.accepted = true;
             } else {
                 level.x += 64 * deltaX;
