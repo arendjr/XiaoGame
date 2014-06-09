@@ -1,5 +1,5 @@
-import QtQuick 1.1
-import VPlay 1.0
+import QtQuick 2.0
+import VPlay 2.0
 
 LevelBase {
     id: level
@@ -8,11 +8,5 @@ LevelBase {
         color: "#8ba049"
         height: 4096
         width: 4096
-    }
-
-    PhysicsWorld {
-        debugDraw.opacity: 0.2
-        id: physicsWorld
-        updatesPerSecondForPhysics: 30
     }
 }

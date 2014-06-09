@@ -20,7 +20,6 @@ function init(items) {
             var instance = component.createObject(scene, {});
             if (instance) {
                 console.debug("XiaoItemManager: created instance of item:", itemName);
-                gameWindow.loadItemWithCocos(instance);
                 instances[itemName] = [instance];
             } else {
                 console.log("ERROR: XiaoItemManager: Error creating instance of item:", itemName);
@@ -59,7 +58,6 @@ function createItemByName(itemName, properties) {
     } else {
         console.debug("XiaoItemManager: creating new instance of item with name:", itemName);
         instance = components[itemName].createObject(scene, properties);
-        gameWindow.loadItemWithCocos(instance);
         instances[itemName].push(instance);
         return instance;
     }

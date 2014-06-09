@@ -1,13 +1,14 @@
-import QtQuick 1.1
-import VPlay 1.0
-import Box2D 1.0
+import QtQuick 2.0
+import VPlay 2.0
 
 EntityBase {
     id: entity
 
-    width: 16
-    height: 16
+    width: 32
+    height: 32
     z: 1
+
+    smooth: false
 
     property string imageBasename: ""
 

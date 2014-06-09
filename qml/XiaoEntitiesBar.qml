@@ -1,7 +1,7 @@
-import QtQuick 1.1
-import VPlay 1.0
+import QtQuick 2.0
+import VPlay 2.0
 
-Clipping {
+Item {
     id: entitiesBar
     width: 150
 
