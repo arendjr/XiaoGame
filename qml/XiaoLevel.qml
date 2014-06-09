@@ -9,4 +9,11 @@ LevelBase {
         height: 4096
         width: 4096
     }
+
+    PhysicsWorld {
+        debugDraw.opacity: 0.2
+        debugDrawVisible: false
+        id: physicsWorld
+        updatesPerSecondForPhysics: 30
+    }
 }
