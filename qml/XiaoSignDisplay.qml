@@ -39,8 +39,8 @@ Rectangle {
 
             onClicked: {
                 textEdit.text = scene.activeSign.text;
-                gameWindow.forceActiveFocus();
                 scene.state = "sign";
+                scene.focus = true;
             }
         }
 
@@ -53,8 +53,8 @@ Rectangle {
             onClicked: {
                 scene.activeSign.text = textEdit.text;
                 gameWindow.saveLevel();
-                gameWindow.forceActiveFocus();
                 scene.state = "sign";
+                scene.focus = true;
             }
         }
     }

@@ -40,49 +40,6 @@ GameWindow {
         LevelLoader {
             id: levelLoader
         }
-
-        Keys.onPressed: {
-            var deltaX = 0, deltaY = 0;
-
-            if (event.key === Qt.Key_Up) {
-                deltaY = -1;
-                event.accepted = true;
-            } else if (event.key === Qt.Key_Right) {
-                deltaX = 1;
-                event.accepted = true;
-            } else if (event.key === Qt.Key_Down) {
-                deltaY = 1;
-                event.accepted = true;
-            } else if (event.key === Qt.Key_Left) {
-                deltaX = -1;
-                event.accepted = true;
-            }
-
-            if (event.modifiers & Qt.ControlModifier) {
-                if (event.key === Qt.Key_E) {
-                    switch (scene.state) {
-                    case "playing":
-                        scene.state = "levelEditing";
-                        break;
-                    case "levelEditing":
-                        scene.state = "playing";
-                        break;
-                    case "sign":
-                        scene.state = "signEditing";
-                        break;
-                    case "signEditing":
-                        scene.state = "sign";
-                        break;
-                    }
-                    event.accepted = true;
-                } else {
-                    level.x += 64 * deltaX;
-                    level.y += 64 * deltaY;
-                }
-            } else {
-                scene.movePlayer(deltaX, deltaY);
-            }
-        }
     }
 
     LevelEditor {

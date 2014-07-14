@@ -79,6 +79,8 @@ XiaoEntity {
                 (dx <= 0 || x < level.width) && (dy <= 0 || y < level.height)) {
                 x += dx;
                 y += dy;
+
+                scene.centerOnPlayer();
             }
         }
     }

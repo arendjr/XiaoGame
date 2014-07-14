@@ -15,10 +15,30 @@ Scene {
     property variant activeSign: null
 
     /**
+     * Centers the scene view on the player.
+     */
+    function centerOnPlayer() {
+        var levelX = scene.width / 2 - player.x - gridSize / 2;
+        var levelY = scene.height / 2 - player.y - gridSize / 2;
+
+        if (levelX > 0) {
+            levelX = 0;
+        }
+        if (levelY > 0) {
+            levelY = 0;
+        }
+
+        level.x = levelX;
+        level.y = levelY;
+    }
+
+    /**
      * Initializes the scene.
      */
     function init() {
         player = entityManager.getEntityArrayByType("Player")[0];
+
+        centerOnPlayer();
     }
 
     /**
@@ -26,7 +46,6 @@ Scene {
      */
     function movePlayer(dx, dy) {
         if (state === "playing") {
-            var player = scene.player;
             if (player) {
                 player.move(dx, dy);
             }
@@ -129,6 +148,49 @@ Scene {
 
             // reset selection when state changes
             editEntityBar.selectEntity(null);
+        }
+    }
+
+    Keys.onPressed: {
+        var deltaX = 0, deltaY = 0;
+
+        if (event.key === Qt.Key_Up) {
+            deltaY = -1;
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Right) {
+            deltaX = 1;
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Down) {
+            deltaY = 1;
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Left) {
+            deltaX = -1;
+            event.accepted = true;
+        }
+
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_E) {
+                switch (state) {
+                case "playing":
+                    state = "levelEditing";
+                    break;
+                case "levelEditing":
+                    state = "playing";
+                    break;
+                case "sign":
+                    state = "signEditing";
+                    break;
+                case "signEditing":
+                    state = "sign";
+                    break;
+                }
+                event.accepted = true;
+            } else {
+                level.x += 128 * deltaX;
+                level.y += 128 * deltaY;
+            }
+        } else {
+            movePlayer(deltaX, deltaY);
         }
     }
 }

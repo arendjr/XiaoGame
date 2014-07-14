@@ -17,6 +17,8 @@ int main(int argc, char *argv[]) {
 
     vplay.setMainQmlFileName(QStringLiteral("qml/Main.qml"));
 
+    vplay.setContentScaleAndFileSelectors(1);
+
     // use this instead of the above call to avoid deployment of the qml files and compile them into the binary with qt's resource system qrc
     // this is the preferred deployment option for debug and release builds on mobile, and for publish builds on all platforms
     // to avoid deployment of your qml files and images, also comment the DEPLOYMENTFOLDERS command in the .pro file
