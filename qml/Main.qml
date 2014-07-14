@@ -65,6 +65,9 @@ GameWindow {
         }
 
         onLoadLevelFinished: {
+            level.width = 4096;
+            level.height = 4096;
+
             // let the scene do its own initialization
             scene.init();
             // entitiesBar must be initialized lazily, otherwise level is not available yet

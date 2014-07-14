@@ -4,6 +4,7 @@ import VPlay 2.0
 XiaoEntity {
     entityType: "House"
     imageBasename: "outdoor/house"
+    obstacle: true
     variationType: "1"
 
     width: 96

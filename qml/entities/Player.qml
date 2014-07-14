@@ -62,23 +62,32 @@ XiaoEntity {
      * Moves the player dx steps to the right, and dy steps down.
      */
     function move(dx, dy) {
-        dx *= scene.gridSize;
-        dy *= scene.gridSize;
+        var gridSize = scene.gridSize;
+
+        dx *= gridSize;
+        dy *= gridSize;
 
         var _ = LoDash._;
+        var newX = x + dx, newY = y + dy;
         var obstacle = _.find(collidingEntities, function(collidingEntity) {
-            return collidingEntity.obstacle &&
-                   collidingEntity.x - entity.x === dx && collidingEntity.y - entity.y === dy;
+            if (!collidingEntity.obstacle) {
+                return false;
+            }
+
+            var boxX = collidingEntity.x + collidingEntity.boxX,
+                boxY = collidingEntity.y + collidingEntity.boxY;
+            return (newX >= boxX && newX <= boxX + collidingEntity.boxWidth - 1 &&
+                    newY >= boxY && newY <= boxY + collidingEntity.boxHeight - 1);
         });
         if (obstacle) {
             if (obstacle.activate) {
                 obstacle.activate(entity);
             }
         } else {
-            if ((dx >= 0 || x > 0) && (dy >= 0 || y > 0) &&
-                (dx <= 0 || x < level.width) && (dy <= 0 || y < level.height)) {
-                x += dx;
-                y += dy;
+            if ((dx >= 0 || x > 0) && (dx <= 0 || x < level.width - gridSize) &&
+                (dy >= 0 || y > 0) && (dy <= 0 || y < level.height - gridSize)) {
+                x = newX;
+                y = newY;
 
                 scene.centerOnPlayer();
             }
