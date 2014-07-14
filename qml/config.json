@@ -4,7 +4,7 @@
     "orientation": "landscape",
     "versioncode": 1,
     "versionname": "1.0",
-    "sdk": "2.0.2",
+    "sdk": "2.0.3",
     
     "android": {
         "identifier": "net.vplay.builds.XiaoGame"
